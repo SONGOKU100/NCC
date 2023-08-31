@@ -1,26 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Linq;
-class Program
+
+namespace lab3
 {
-    static void Main(string[] args)
+    public class CountAndSquare
     {
-        List<int> num = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-        var querry1 = from n in num
-                      let sqrval = n * n
-                      where sqrval > 10
-                      select new { value=n, sqrval = n * n };
-                      
-        var querry2 = num.Where(x => x * x > 10).Select(x => new {val=x, sqrval = x * x });
 
-        foreach(var s in querry1)
+        public static void calculate(int[] nums)
         {
-            Console.WriteLine(s);
+            //number of elements in the array
+            int count = nums.Length;
+
+            //LINQ to find the square of each element in the array
+            var squares = from n in nums
+                          select n * n;
+
+            Console.WriteLine($"Given array:");
+            foreach (var n in nums)
+            {
+                Console.Write(n + " ");
+            }
+            Console.WriteLine("\n=========================");
+
+            //results
+            Console.WriteLine($"> Number of elements in the array: {count}");
+
+            Console.WriteLine($"> Square of each element in the array:");
+            foreach (var square in squares)
+            {
+                Console.Write("   " + square);
+            }
+            System.Console.WriteLine();
+        }
+        static void Main(string[] args)
+        {
+
+            int[] numbers = { 1, 2, 3, 4, 5 };
+
+            CountAndSquare.calculate(numbers);
         }
 
-        foreach(var i in querry2)
-        {
-            Console.WriteLine("{0},{1}",i.val,i.sqrval);
-        }
     }
 }
